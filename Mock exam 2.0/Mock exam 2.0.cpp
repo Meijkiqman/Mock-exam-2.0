@@ -8,7 +8,15 @@
 int main()
 {
     std::cout << "Hello World!\n";
-	move();
+	if (move(3))
+	{
+		mainMenu();
+	}
+	else
+	{
+		return 0;
+	}
+	
 }
 
 
@@ -26,19 +34,16 @@ void board()
 		for (int k = 0; k < Y; k++)
 		{
 
-			if (k == 0)
-			{
-				std::cout << "|";
-			}
+			
 			
 			
 			if (i == xpos && k == ypos)
 			{
-				std::cout << "*";
+				std::cout << "*" << "|";
 			}
 			else
 			{
-				std::cout << numbers[i][k]; // this is how you print a 2d vector
+				std::cout << numbers[i][k] << "|"; // this is how you print a 2d vector
 			}
 		}
 		std::cout << std::endl;
@@ -49,90 +54,68 @@ void board()
 	}
 }
 
-void move()
+bool move(int attempts)
 {
-	char input;
-	board();
-	while (attempts > 0)
+	for (int i = 0; i < attempts; i++)
 	{
-		moves = 4;
-		for (int M = 0; M < moves; M++)
-		{
-			{
-
-
-				do
-				{
-					input = _getch();
-
-					switch (input)
-					{
-					case 'w':
-
-						xpos--;
-						moves--;
-
-						break;
-
-					case 's':
-
-						xpos++;
-						moves--;
-
-						break;
-
-					case 'd':
-
-						ypos++;
-						moves--;
-						break;
-
-					case 'a':
-
-						ypos--;
-						moves--;
-
-						break;
-
-					default:
-						break;
-
-					}
-					if (ypos >= Y)
-					{
-
-						ypos = 0;
-
-					}
-					if (ypos < 0)
-					{
-						ypos = Y - 1;
-					}
-					if (xpos >= X)
-					{
-						xpos = 0;
-					}
-					if (xpos < 0)
-					{
-						xpos = X - 1;
-					}
-					board();
-
-				} while (true && moves != 0);
-			}
-		}
-		
-		system("cls");
-		std::cout << "failed!, reseting board... \n";
-		ypos == 0;
 		xpos == 0;
-		system("pause");
-		
-		attempts--;
+		ypos == 0;
+		myMoves = {};
+		for (int k = 0; k < moves; k++)
+		{
+			board();
+			char input;
+			input = _getch();
+			switch (input)
+			{
+			case 'w':
+				xpos--;
+				
+				break;
+			case 's':
+				xpos++;
+				
+				break;
+			case 'a':
+				ypos--;
+				
+				break;
+			case 'd':
+
+				ypos++;
+				
+				break;
+			default:
+				break;
+			}
+			//resets position if you go outside the grid
+			if (xpos < 0)
+			{
+				xpos = 0;
+			}
+			if (ypos < 0)
+			{
+				ypos = 0;
+			}
+			if (ypos >= Y)
+			{
+				ypos = Y - 1;
+			}
+			if (xpos >= X)
+			{
+				xpos = X - 1;
+			}
+			myMoves.push_back(input);
+			
+		}
+		if (myMoves == password)
+		{
+			return true;
+		}
 	}
-	if (attempts == 0)
-	{
-		std::cout << "\n failed to enter password, goodbye!:" << std::exit;
-	}
-	
+	return false;
+}
+void mainMenu()
+{
+	std::cout << "main menu";
 }

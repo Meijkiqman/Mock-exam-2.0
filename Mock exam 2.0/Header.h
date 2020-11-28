@@ -1,13 +1,14 @@
 #pragma once
 void board();
-void move();
+bool move(int attempts);
+void mainMenu();
 int moves = 4;
-int attempts = 3;
+
 
 int X = 3;
 int Y = 3;
-int xpos;
-int ypos;
+int xpos = 0;
+int ypos = 0;
 
 
 
