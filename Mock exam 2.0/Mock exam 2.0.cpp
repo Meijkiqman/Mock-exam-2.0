@@ -9,6 +9,7 @@
 
 int main()
 {
+	srand(time(0));
     std::cout << "Hello World!\n";
 	if (move(3))
 	{
@@ -205,12 +206,34 @@ void task1()
 
 class Classvalue
 {
+public:
 	char name;
 	int value;
 	int place;
 };
 void task2()
 {
+	system("cls");
+	std::vector<Classvalue> myClass;
+	for (int i = 0; i < 20; i++)
+	{
+		//declare a value for the class
+		Classvalue v;
+		v.value = rand()  % 21;
+		v.name = static_cast<char>('A' + i); //this makes an alphabet
+		v.place = i;
+		myClass.push_back(v);
+	}
+	std::cout << "Place\t" << "Name\t" << "Value\t" << "HealthBar\t" << std::endl;
+	for (int i = 0; i < myClass.size(); i++)
+	{
+		std::cout << myClass[i].place << "\t" << myClass[i].name << "\t" << myClass[i].value << "\t";
+		for (int k = 0; k < myClass[i].value; k++)
+		{
+			std::cout << "*";
+		}
+		std::cout << std::endl;
+	}
 
 }
 
